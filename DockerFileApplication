@@ -1,0 +1,5 @@
+FROM java:8
+VOLUME /tmp
+EXPOSE 10222
+ADD /compiled/StoomBackendQualification-1.0.jar StoomBackendQualification-1.0.jar
+ENTRYPOINT ["java","-jar","StoomBackendQualification-1.0.jar"]
