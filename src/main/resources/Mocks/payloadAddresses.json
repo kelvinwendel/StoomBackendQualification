@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "streetName": "Rua Tiradentes",
+        "number": 508,
+        "complement": "Loja Magazine",
+        "neighbourhood": "Centro",
+        "city": "Araras",
+        "state": "Sao Paulo",
+        "country": "Brasil",
+        "zipcode": "13606-070",
+        "latitude": null,
+        "longitude": null
+      },
+      {
+        "id": 2,
+        "streetName": "Av. Dona Renata",
+        "number": 2914,
+        "complement": "Rodoviaria",
+        "neighbourhood": "Vila Michelin",
+        "city": "Araras",
+        "state": "Sao Paulo",
+        "country": "Brasil",
+        "zipcode": "13600-001",
+        "latitude": null,
+        "longitude": null
+      }
+]
