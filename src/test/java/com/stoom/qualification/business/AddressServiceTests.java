@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +32,7 @@ public class AddressServiceTests {
     private AddressRepository addressRepository;
 
     @BeforeEach
-    public void setup() throws IOException {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
         payloadAddress = (Address) TestUtilities.mapJsonToClass("payloadAddress", Address.class, false);
         payloadAddresses = (List<Address>) TestUtilities.mapJsonToClass("payloadAddresses",
@@ -94,11 +93,9 @@ public class AddressServiceTests {
 
     /**
      * Responsible for test an create operation.
-     *
-     * @throws IOException occurred during a mapping of payload.
      */
     @Test
-    public void shouldReturnCreatedAddress() throws IOException {
+    public void shouldReturnCreatedAddress() {
         Mockito.when(addressRepository.save(payloadAddress)).thenReturn(payloadAddress);
         Address addressCreated = addressService.create(payloadAddress);
 

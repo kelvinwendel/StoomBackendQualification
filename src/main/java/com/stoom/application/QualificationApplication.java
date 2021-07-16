@@ -9,13 +9,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class QualificationApplication {
 
-	/**
-	 * Initialize the API.
-	 *
-	 * @param args
-	 *   Arguments for initialization of API.
-	 */
-	public static void main(String[] args) {
-		SpringApplication.run(QualificationApplication.class, args);
-	}
+    /**
+     * Initialize the API.
+     *
+     * @param args Arguments for initialization of API.
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(QualificationApplication.class, args);
+    }
 }

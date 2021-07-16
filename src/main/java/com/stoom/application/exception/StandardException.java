@@ -5,42 +5,42 @@ package com.stoom.application.exception;
  */
 public class StandardException {
 
-	private Integer statusCode;
-	private String date;
-	private String message;
+    private Integer statusCode;
+    private String date;
+    private String message;
 
-	public StandardException() {
-		super();
-	}
+    public StandardException() {
+        super();
+    }
 
-	public StandardException(Integer statusCode, String date, String message) {
-		super();
-		this.statusCode = statusCode;
-		this.date = date;
-		this.message = message;
-	}
+    public StandardException(Integer statusCode, String date, String message) {
+        super();
+        this.statusCode = statusCode;
+        this.date = date;
+        this.message = message;
+    }
 
-	public Integer getStatusCode() {
-		return statusCode;
-	}
+    public Integer getStatusCode() {
+        return statusCode;
+    }
 
-	public void setStatusCode(Integer statusCode) {
-		this.statusCode = statusCode;
-	}
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode;
+    }
 
-	public String getDate() {
-		return date;
-	}
+    public String getDate() {
+        return date;
+    }
 
-	public void setDate(String date) {
-		this.date = date;
-	}
+    public void setDate(String date) {
+        this.date = date;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
