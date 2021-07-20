@@ -22,8 +22,10 @@ public class TestUtilities {
      */
     @SneakyThrows
     public static Object mapJsonToClass(String name, Class<?> clazz, boolean isCollection) {
+        String sep = System.getProperty("file.separator");
+        sep = sep + sep;
         ObjectMapper mapper = new ObjectMapper();
-        File file = new File(".\\src\\main\\resources\\Mocks\\" + name + ".json");
+        File file = new File("." + sep + "src" + sep + "main" + sep + "resources" + sep + "Mocks" + sep + name + ".json");
 
         if (isCollection) {
             CollectionType type = mapper.getTypeFactory().constructCollectionType(List.class, clazz);
