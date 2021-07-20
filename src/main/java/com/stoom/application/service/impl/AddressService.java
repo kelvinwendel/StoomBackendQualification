@@ -1,8 +1,9 @@
-package com.stoom.application.service;
+package com.stoom.application.services.impl;
 
 import com.stoom.application.domain.Address;
 import com.stoom.application.exception.ObjectNotFoundException;
 import com.stoom.application.repository.AddressRepository;
+import com.stoom.application.services.IAddressService;
 import com.stoom.application.util.ExportUtilities;
 import lombok.SneakyThrows;
 import org.apache.http.client.HttpClient;
@@ -28,10 +29,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
- * Class that represents the services supported by {@code Address}.
+ * Class that represents the business domain of {@code Address}.
  */
 @Service
-public class AddressService {
+public class AddressService implements IAddressService {
 
     @Autowired
     private AddressRepository addressRepository;
@@ -46,6 +47,7 @@ public class AddressService {
      * @param id ID of address to find.
      * @return A {@code Address} found.
      */
+    @Override
     public Address findByID(Long id) {
         Optional<Address> address = addressRepository.findById(id);
         return address.orElseThrow(
@@ -57,6 +59,7 @@ public class AddressService {
      *
      * @return A {@code Page<Address>}.
      */
+    @Override
     public Page<Address> findAll(Pageable pageable) {
         Page<Address> addresses = addressRepository.findAll(pageable);
         return addresses;
@@ -69,6 +72,7 @@ public class AddressService {
      * @param obj An address provided by request with fields updated.
      * @return An {@code Address} updated.
      */
+    @Override
     public Address update(Long id, Address obj) {
         Address address = findByID(id);
         BeanUtils.copyProperties(obj, address);
@@ -84,6 +88,7 @@ public class AddressService {
      * @return An {@code Address} created.
      */
     @SneakyThrows
+    @Override
     public Address create(Address address) {
         address.setId(null);
 
@@ -123,6 +128,7 @@ public class AddressService {
      *
      * @param id ID of address to be removed.
      */
+    @Override
     public void delete(Long id) {
         Address address = findByID(id);
         addressRepository.delete(address);
@@ -134,6 +140,7 @@ public class AddressService {
      * @return A '.XLSX' file with list of Address.
      */
     @SneakyThrows
+    @Override
     public InputStreamResource exportDataToXLSX(Pageable pageable) {
         String name = "Addresses";
         String[] columns = new String[]{"Street", "Number", "Complement", "Neighbourhood", "City", "State", "ZipCode"};

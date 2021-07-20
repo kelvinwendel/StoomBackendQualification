@@ -1,7 +1,7 @@
 package com.stoom.application.controller;
 
 import com.stoom.application.domain.Address;
-import com.stoom.application.service.AddressService;
+import com.stoom.application.services.IAddressService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -24,7 +24,7 @@ import java.net.URI;
 public class AddressController {
 
     @Autowired
-    private AddressService addressService;
+    private IAddressService addressService;
 
     /**
      * Method responsible for find an {@code Address} by ID.

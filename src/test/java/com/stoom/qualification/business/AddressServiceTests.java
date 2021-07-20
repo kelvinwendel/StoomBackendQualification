@@ -2,7 +2,7 @@ package com.stoom.qualification.business;
 
 import com.stoom.application.domain.Address;
 import com.stoom.application.repository.AddressRepository;
-import com.stoom.application.service.AddressService;
+import com.stoom.application.services.IAddressService;
 import com.stoom.application.util.TestUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,7 +27,7 @@ public class AddressServiceTests {
     private List<Address> payloadAddresses;
 
     @InjectMocks
-    private AddressService addressService;
+    private IAddressService addressService;
 
     @Mock
     private AddressRepository addressRepository;
