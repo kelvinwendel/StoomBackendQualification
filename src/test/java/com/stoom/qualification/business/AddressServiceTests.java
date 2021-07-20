@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.data.domain.*;
 
 import java.util.Comparator;
 import java.util.List;
@@ -58,8 +59,11 @@ public class AddressServiceTests {
      */
     @Test
     public void shouldReturnAllAddresses() {
-        Mockito.when(addressRepository.findAll()).thenReturn(payloadAddresses);
-        List<Address> addresses = addressService.findAll();
+        Pageable pageable = PageRequest.of(0, 5, Sort.Direction.ASC, "id");
+        Page<Address> pageAddress =  new PageImpl<>(payloadAddresses, pageable, payloadAddresses.size());
+
+        Mockito.when(addressRepository.findAll(pageable)).thenReturn(pageAddress);
+        Page<Address> addresses = addressService.findAll(pageable);
 
         Address firstAddress = addresses.stream().findFirst().get();
         Address lastAddress = addresses.stream().max(Comparator.comparing(Address::getId)).get();

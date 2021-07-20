@@ -5,13 +5,16 @@ import com.stoom.application.service.AddressService;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 
 /**
  * Controller responsible for {@link Address} behavior.
@@ -38,11 +41,12 @@ public class AddressController {
     /**
      * Method responsible for find all addresses.
      *
-     * @return A {@code ResponseEntity<List<Address>>} with addresses found.
+     * @return A {@code ResponseEntity<Page<Address>>} with addresses found.
      */
     @GetMapping
-    public ResponseEntity<List<Address>> findAllAddresses() {
-        List<Address> addresses = addressService.findAll();
+    public ResponseEntity<Page<Address>> findAllAddresses(@PageableDefault(page = 0, size = 5, sort = "id",
+            direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Address> addresses = addressService.findAll(pageable);
         return ResponseEntity.ok(addresses);
     }
 
@@ -93,10 +97,11 @@ public class AddressController {
      */
     @SneakyThrows
     @GetMapping(value = "/export")
-    public ResponseEntity<InputStreamResource> exportToXLSX() {
+    public ResponseEntity<InputStreamResource> exportToXLSX(@PageableDefault(page = 0, size = 5, sort = "id",
+            direction = Sort.Direction.ASC) Pageable pageable) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=Addresses.xlsx");
-        InputStreamResource stream = addressService.exportDataToXLSX();
+        InputStreamResource stream = addressService.exportDataToXLSX(pageable);
 
         return ResponseEntity.ok().headers(headers).body(stream);
     }

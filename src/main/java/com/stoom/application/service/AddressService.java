@@ -13,6 +13,8 @@ import org.json.JSONObject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -20,7 +22,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -54,12 +55,11 @@ public class AddressService {
     /**
      * Responsible for find all addresses.
      *
-     * @return A {@code List<Address>}.
+     * @return A {@code Page<Address>}.
      */
-    public List<Address> findAll() {
-        List<Address> addressList = addressRepository.findAll();
-        addressList.sort(Comparator.comparing(Address::getId, Comparator.naturalOrder()));
-        return addressList;
+    public Page<Address> findAll(Pageable pageable) {
+        Page<Address> addresses = addressRepository.findAll(pageable);
+        return addresses;
     }
 
     /**
@@ -134,12 +134,12 @@ public class AddressService {
      * @return A '.XLSX' file with list of Address.
      */
     @SneakyThrows
-    public InputStreamResource exportDataToXLSX() {
+    public InputStreamResource exportDataToXLSX(Pageable pageable) {
         String name = "Addresses";
         String[] columns = new String[]{"Street", "Number", "Complement", "Neighbourhood", "City", "State", "ZipCode"};
         String[] fields = new String[]{"streetName", "number", "complement", "neighbourhood", "city", "state", "zipcode"};
 
-        List<Address> addresses = findAll();
+        List<Address> addresses = findAll(pageable).getContent();
         return ExportUtilities.generateXLSX(name, columns, fields, addresses);
     }
 }
